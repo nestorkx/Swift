@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  HomeViewController.swift
 //  launchScreen
 //
 //  Created by Nestor Kauil on 01/08/18.
@@ -10,9 +10,9 @@ import UIKit
 import LBTAComponents
 import RevealingSplashView
 
-class ViewController: UIViewController {
+class HomeViewController: UIViewController {
     
-    // Esta es la primera pantalla con la lista de opciones
+    // Esta es la primera pantalla como lista de opciones
     // Que se ve como tipo Youtube
     let background: UIImageView = {
         let iv = UIImageView()
@@ -21,33 +21,28 @@ class ViewController: UIViewController {
         return iv
     }()
     
-    // Este es el Splash, en el que se configura el icono, el color de fondo y el tamaño del icono
-    let revealingSplashView = RevealingSplashView (iconImage: #imageLiteral(resourceName: "RevealingSplashViewIcon"), iconInitialSize: CGSize(width:123, height: 123), backgroundColor: UIColor(r:78, g:172, b:248))
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         setupViews()
+        
+        Timer.scheduledTimer(withTimeInterval: 5, repeats: false) { (timer) in
+            // Enviar notificacion aqui
+            NotificationCenter.default.post(name: heartAttackNotificationName, object: nil)
+        }
     }
     
     func setupViews(){
-        //Se agregan las 2 vistas la 1era pantalla y el Splash
+        //Se agregan la vista la pantalla principal
         view.addSubview(background)
-        view.addSubview(revealingSplashView)
-        
+      
         background.fillSuperview()
-        // Efecto como el de Twitter, se agranda el icono
-        revealingSplashView.animationType = .swingAndZoomOut
-        
-        
-        revealingSplashView.startAnimation()
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
+    
+    
 }
-
